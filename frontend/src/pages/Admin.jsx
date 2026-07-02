@@ -16,9 +16,11 @@ const Admin = () => {
   });
   const [editingId, setEditingId] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
   const fetchProjects = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/projects');
+      const res = await axios.get(`${API_URL}/api/projects`);
       setProjects(res.data);
     } catch (err) {
       console.error(err);
@@ -42,9 +44,9 @@ const Admin = () => {
 
     try {
       if (editingId) {
-        await axios.put(`http://localhost:5000/api/projects/${editingId}`, projectData);
+        await axios.put(`${API_URL}/api/projects/${editingId}`, projectData);
       } else {
-        await axios.post('http://localhost:5000/api/projects', projectData);
+        await axios.post(`${API_URL}/api/projects`, projectData);
       }
       setFormData({ title: '', description: '', technologies: '', imageUrl: '', liveUrl: '', githubUrl: '' });
       setEditingId(null);
@@ -65,7 +67,7 @@ const Admin = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/projects/${id}`);
+        await axios.delete(`${API_URL}/api/projects/${id}`);
         fetchProjects();
       } catch (err) {
         console.error(err);

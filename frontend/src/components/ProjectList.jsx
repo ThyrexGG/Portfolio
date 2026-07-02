@@ -11,8 +11,9 @@ const ProjectList = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
         // Try to fetch from the backend database first
-        const response = await axios.get('http://localhost:5000/api/projects');
+        const response = await axios.get(`${API_URL}/api/projects`);
         setProjects(response.data);
         setLoading(false);
       } catch (err) {
