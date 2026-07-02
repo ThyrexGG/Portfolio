@@ -25,14 +25,15 @@
 }
 
 [data-theme='light'] {
-  --bg-primary: #fafafa;
+  --bg-primary: #f0f4f8; /* Softer, slightly cool background */
   --bg-secondary: #ffffff;
-  --text-primary: #050505;
-  --text-secondary: #52525b;
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(14, 165, 233, 0.3);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-  --neon-glow: 0 0 10px rgba(14, 165, 233, 0.2);
+  --text-primary: #0f172a; /* Much darker slate for high contrast */
+  --text-secondary: #334155; /* Darker slate for description text */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(14, 165, 233, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+  --neon-glow: none; /* Remove neon glow from light mode completely */
+  --text-glow: none; /* Remove text shadow */
 }
 
 * {
@@ -98,7 +99,7 @@ ul {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 8px rgba(56, 189, 248, 0.25);
+  text-shadow: var(--text-glow, 0 0 8px rgba(56, 189, 248, 0.25));
 }
 
 /* Container */

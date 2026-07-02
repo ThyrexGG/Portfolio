@@ -11,29 +11,50 @@ const ProjectList = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        // Fetch repositories directly from GitHub API
-        const response = await axios.get('https://api.github.com/users/ThyrexGG/repos?sort=updated&per_page=6');
-        
-        // Map GitHub repo data to match our ProjectCard prop structure
-        // Also filtering out any Java-related projects as requested
-        const githubProjects = response.data
-          .filter(repo => !repo.name.toLowerCase().includes('java'))
-          .map(repo => ({
-            _id: repo.id,
-            title: repo.name.replace(/-/g, ' ').replace(/_/g, ' '),
-            description: repo.description || 'A software development project hosted on GitHub.',
-            technologies: repo.language ? [repo.language] : ['Code'],
-            // Using a reliable placeholder image with tech vibe
-            imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop',
-            githubUrl: repo.html_url,
-            liveUrl: repo.homepage || ''
-          }));
-        
-        setProjects(githubProjects);
+        // Try to fetch from the backend database first
+        const response = await axios.get('http://localhost:5000/api/projects');
+        setProjects(response.data);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching projects from GitHub:', err);
-        setError('Failed to load projects from GitHub. Please try again later.');
+        console.warn('Backend offline, using fallback data...');
+        // Fallback data so your portfolio looks perfect even if the database connection fails!
+        setProjects([
+          {
+            _id: '1',
+            title: 'Gourmet Restaurant Web',
+            description: 'A luxurious e-commerce and booking platform for a high-end restaurant. Features a beautiful dark-mode glassmorphism UI, a dynamic menu, and table reservation capabilities.',
+            technologies: ['React', 'CSS', 'HTML', 'JavaScript'],
+            githubUrl: 'https://github.com/ThyrexGG/restaurant',
+            liveUrl: 'https://restaurant-three-chi-91.vercel.app/',
+            imageUrl: '/images/restaurant_app_ui.png'
+          },
+          {
+            _id: '2',
+            title: 'My personal portfolio',
+            description: 'My personal web developer portfolio! Built with React and Three.js, it features 3D interactive elements, parallax hover effects, and live GitHub API integration.',
+            technologies: ['React', 'Vite', 'Three.js', 'Express.js'],
+            githubUrl: 'https://github.com/ThyrexGG/Portfolio',
+            imageUrl: '/images/portfolio_app_ui.png'
+          },
+          {
+            _id: '3',
+            title: 'Student Rental App (Internship)',
+            description: 'A comprehensive platform built during my internship to help students find affordable, safe rental housing near their university. Features include map integration and property listings.',
+            technologies: ['React', 'Node.js', 'MongoDB', 'AWS'],
+            githubUrl: 'https://github.com/ThyrexGG/rental-app',
+            liveUrl: 'https://internship-project-two-blush.vercel.app/login',
+            imageUrl: '/images/rental_app_ui.png'
+          },
+          {
+            _id: '4',
+            title: 'OCR for impaired user',
+            description: 'An OCR application built to assist visually impaired users with highly accessible UI, high contrast themes, and text-to-speech integration.',
+            technologies: ['Vue', 'JavaScript', 'HTML/CSS'],
+            githubUrl: 'https://github.com/ThyrexGG/OCR-for-impaired-user',
+            liveUrl: 'https://ocr-for-impaired-user.vercel.app',
+            imageUrl: '/images/ocr_app_ui.png'
+          }
+        ]);
         setLoading(false);
       }
     };

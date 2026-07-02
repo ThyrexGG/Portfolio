@@ -8,6 +8,8 @@ const DigitalEarth = () => {
   const [countries, setCountries] = useState({ features: [] });
   const [globeSize, setGlobeSize] = useState(420);
 
+  const [theme, setTheme] = useState(document.documentElement.getAttribute('data-theme') || 'dark');
+
   useEffect(() => {
     const handleResize = () => {
       setGlobeSize(window.innerWidth < 450 ? 220 : 420);
@@ -16,7 +18,21 @@ const DigitalEarth = () => {
     window.addEventListener('resize', handleResize);
     handleResize(); // Initial check
     
-    return () => window.removeEventListener('resize', handleResize);
+    // Theme observer
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-theme') {
+          setTheme(document.documentElement.getAttribute('data-theme') || 'dark');
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true });
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      observer.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -66,7 +82,7 @@ const DigitalEarth = () => {
           width={globeSize}
           height={globeSize}
           backgroundColor="rgba(0,0,0,0)" // Transparent background
-          globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+          globeImageUrl={theme === 'light' ? "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg" : "//unpkg.com/three-globe/example/img/earth-dark.jpg"}
           bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
           atmosphereColor="#38bdf8"
           atmosphereAltitude={0.25}

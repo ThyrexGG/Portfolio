@@ -1,10 +1,12 @@
-import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import React, { useState } from 'react';
+import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import Tilt from 'react-parallax-tilt';
 import './ProjectCard.css';
 
 const ProjectCard = ({ project }) => {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <Tilt
       tiltMaxAngleX={10}
@@ -43,9 +45,25 @@ const ProjectCard = ({ project }) => {
         
         <div className="project-info">
           <h3>{project.title}</h3>
-          <p className="project-description">{project.description}</p>
           
-          <div className="project-tech">
+          <div className={`project-description-container ${expanded ? 'expanded' : ''}`}>
+            <p className="project-description">
+              {project.description}
+            </p>
+          </div>
+          
+          <button 
+            className="expand-btn" 
+            onClick={() => setExpanded(!expanded)}
+          >
+            {expanded ? (
+              <><ChevronUp size={16} /> Show Less</>
+            ) : (
+              <><ChevronDown size={16} /> Read Description</>
+            )}
+          </button>
+          
+          <div className="project-tech" style={{ marginTop: '1rem' }}>
             {project.technologies.map((tech, index) => (
               <span key={index} className="tech-badge">{tech}</span>
             ))}

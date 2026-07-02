@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Admin from './pages/Admin';
 import CustomCursor from './components/CustomCursor';
+import RippleEffect from './components/RippleEffect';
 import { ReactLenis } from 'lenis/react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -28,6 +29,7 @@ function App() {
     <ReactLenis root options={{ lerp: 0.08, smoothWheel: true }}>
       <Router>
         <CustomCursor />
+        <RippleEffect />
         <div className="App">
           <Routes>
             <Route path="/" element={<Home />} />

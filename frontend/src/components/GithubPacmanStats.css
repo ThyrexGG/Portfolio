@@ -20,8 +20,8 @@
 }
 
 .custom-stat-card {
-  background: rgba(13, 17, 23, 0.8);
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
   border-radius: 8px;
   padding: 1.5rem;
   width: 100%;

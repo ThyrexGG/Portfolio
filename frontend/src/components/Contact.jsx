@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Send, MapPin, Phone, Mail } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import './Contact.css';
 
 const Contact = () => {
+  const form = useRef();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,13 +18,23 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate form submission
     setStatus('sending');
-    setTimeout(() => {
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus(''), 3000);
-    }, 1500);
+
+    // Replace these strings with your actual EmailJS IDs later!
+    const serviceId = 'service_placeholder';
+    const templateId = 'template_placeholder';
+    const publicKey = 'public_key_placeholder';
+
+    emailjs.sendForm(serviceId, templateId, form.current, publicKey)
+      .then((result) => {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setStatus(''), 4000);
+      }, (error) => {
+        console.error(error.text);
+        setStatus('error');
+        setTimeout(() => setStatus(''), 4000);
+      });
   };
 
   return (
@@ -38,23 +50,23 @@ const Contact = () => {
           <p className="contact-desc">
             Feel free to reach out to me for any questions or opportunities!
           </p>
-          
+
           <div className="info-item">
             <div className="info-icon"><Mail size={20} /></div>
             <div>
               <h4>Email</h4>
-              <p>tes.bonnathyrak@example.com</p>
+              <p>tesbonnathyrak@gmail.com</p>
             </div>
           </div>
-          
+
           <div className="info-item">
             <div className="info-icon"><Phone size={20} /></div>
             <div>
               <h4>Phone</h4>
-              <p>+1 (555) 123-4567</p>
+              <p>+855 (095) 517-351</p>
             </div>
           </div>
-          
+
           <div className="info-item">
             <div className="info-icon"><MapPin size={20} /></div>
             <div>
@@ -65,52 +77,52 @@ const Contact = () => {
         </div>
 
         <div className="contact-form-container glass" data-aos="fade-left">
-          <form onSubmit={handleSubmit} className="contact-form">
+          <form ref={form} onSubmit={handleSubmit} className="contact-form">
             <div className="form-group">
               <label htmlFor="name">Your Name</label>
-              <input 
-                type="text" 
-                id="name" 
-                name="name" 
+              <input
+                type="text"
+                id="name"
+                name="name"
                 value={formData.name}
                 onChange={handleChange}
-                required 
+                required
                 placeholder="John Doe"
               />
             </div>
-            
+
             <div className="form-group">
               <label htmlFor="email">Your Email</label>
-              <input 
-                type="email" 
-                id="email" 
-                name="email" 
+              <input
+                type="email"
+                id="email"
+                name="email"
                 value={formData.email}
                 onChange={handleChange}
-                required 
+                required
                 placeholder="john@example.com"
               />
             </div>
-            
+
             <div className="form-group">
               <label htmlFor="message">Message</label>
-              <textarea 
-                id="message" 
-                name="message" 
-                rows="5" 
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
                 value={formData.message}
                 onChange={handleChange}
                 required
                 placeholder="How can I help you?"
               ></textarea>
             </div>
-            
+
             <button type="submit" className="btn btn-primary submit-btn" disabled={status === 'sending'}>
               {status === 'sending' ? 'Sending...' : (
                 <>Send Message <Send size={18} /></>
               )}
             </button>
-            
+
             {status === 'success' && (
               <p className="success-msg">Message sent successfully!</p>
             )}

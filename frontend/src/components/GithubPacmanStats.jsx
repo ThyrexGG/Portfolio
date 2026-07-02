@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Star, GitCommit, Users, BookOpen } from 'lucide-react';
 import axios from 'axios';
+import { GitHubCalendar } from 'react-github-calendar';
 import './GithubPacmanStats.css';
 
 const GithubPacmanStats = () => {
@@ -10,8 +11,19 @@ const GithubPacmanStats = () => {
     repos: 4,
     followers: 4,
   });
+  const [theme, setTheme] = useState(document.documentElement.getAttribute('data-theme') || 'dark');
 
   useEffect(() => {
+    // Theme observer
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-theme') {
+          setTheme(document.documentElement.getAttribute('data-theme') || 'dark');
+        }
+      });
+    });
+    observer.observe(document.documentElement, { attributes: true });
+
     // Fetch real data from GitHub
     axios.get('https://api.github.com/users/ThyrexGG')
       .then(res => {
@@ -36,7 +48,7 @@ const GithubPacmanStats = () => {
       <div className="stats-cards">
         {/* Custom Stats Card */}
         <div className="custom-stat-card">
-          <h4>ThyrexGG's GitHub Stats</h4>
+          <h4>GitHub Stats</h4>
           <div className="stat-row">
             <div className="stat-label"><Star size={18} className="stat-icon" /> Total Stars</div>
             <div className="stat-value">{stats.stars}</div>
@@ -69,6 +81,17 @@ const GithubPacmanStats = () => {
             <div className="legend-item"><span className="legend-dot" style={{background: '#e34c26'}}></span> HTML 15%</div>
           </div>
         </div>
+      </div>
+
+      <div className="calendar-container" style={{ margin: '2rem 0', display: 'flex', justifyContent: 'center' }}>
+        <GitHubCalendar 
+          username="ThyrexGG" 
+          colorScheme={theme}
+          errorMessage="Loading GitHub Data..."
+          theme={{
+            dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+          }}
+        />
       </div>
 
       <div className="pacman-path">

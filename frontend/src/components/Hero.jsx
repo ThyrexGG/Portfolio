@@ -30,8 +30,8 @@ const Hero = () => {
             </span>
           </h2>
           <p className="description">
-            Computer Science Student | Full-Stack Development | Backend Development. 
-            I specialize in creating beautiful, responsive, and performant applications using modern technologies.
+            Software Engineering Student @ CAMTECH | Full-Stack Developer | Passionate about building modern, scalable applications from frontend to backend.
+            When I'm not coding, I'm probably gaming or playing sports!
           </p>
           
           <div className="hero-actions">
@@ -50,7 +50,7 @@ const Hero = () => {
             <a href="https://linkedin.com/in/" target="_blank" rel="noreferrer" className="social-icon">
               <FaLinkedin size={24} />
             </a>
-            <a href="mailto:tes.bonnathyrak@example.com" className="social-icon">
+            <a href="mailto:tesbonnathyrak@gmail.com" className="social-icon">
               <Mail size={24} />
             </a>
           </div>

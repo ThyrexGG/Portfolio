@@ -15,13 +15,13 @@ const About = () => {
         <div className="about-text glass" data-aos="fade-right">
           <h3>My Journey</h3>
           <p>
-            I'm a dedicated Computer Science student with a deep passion for full-stack web development. 
-            My journey began with curiosity about how the web works, which quickly evolved into a drive to build scalable, 
-            efficient, and user-centric applications.
+            I'm a dedicated Software Engineering student at CAMTECH (currently in Year 2, Term II) with a deep passion for full-stack web development. 
+            My journey began with a curiosity about how the web works, which quickly evolved into a drive to build scalable, 
+            efficient, and user-centric applications from the front to the back.
           </p>
           <p>
-            I believe in writing clean code, continuously learning new technologies, and collaborating 
-            to solve complex problems. When I'm not coding, I'm exploring new design trends or contributing to open-source projects.
+            I believe in writing clean code, continuously learning new technologies, and tackling complex problems head-on. 
+            When I'm not coding, you can usually find me gaming or playing sports to stay active and recharge!
           </p>
         </div>
 
@@ -31,9 +31,20 @@ const About = () => {
               <GraduationCap size={24} />
             </div>
             <div className="timeline-content">
-              <h4>Computer Science Student</h4>
-              <span className="timeline-date">2023 - Present</span>
-              <p>Focusing on computer science fundamentals, backend, and full-stack development.</p>
+              <h4>Software Engineering Student</h4>
+              <span className="timeline-date">Year 2, Term II (CAMTECH)</span>
+              <p>Focusing on core computer science fundamentals, data structures, and modern software architecture.</p>
+            </div>
+          </div>
+          
+          <div className="timeline-item glass">
+            <div className="timeline-icon">
+              <Briefcase size={24} />
+            </div>
+            <div className="timeline-content">
+              <h4>Full-Stack Developer Intern</h4>
+              <span className="timeline-date">2 Years In Progress</span>
+              <p>Developing a comprehensive Student Rental App platform, handling both the frontend UI and backend architecture.</p>
             </div>
           </div>
           
@@ -42,20 +53,9 @@ const About = () => {
               <BookOpen size={24} />
             </div>
             <div className="timeline-content">
-              <h4>Web Development Bootcamp</h4>
-              <span className="timeline-date">Summer 2024</span>
-              <p>Completed intensive training in the MERN stack and modern UI/UX design.</p>
-            </div>
-          </div>
-          
-          <div className="timeline-item glass">
-            <div className="timeline-icon">
-              <BookOpen size={24} />
-            </div>
-            <div className="timeline-content">
-              <h4>Aspiring Full-Stack Developer</h4>
+              <h4>Aspiring Full-Stack Engineer</h4>
               <span className="timeline-date">Present</span>
-              <p>Actively learning and building personal projects to master modern web technologies.</p>
+              <p>Actively mastering modern web technologies like React, Node.js, Vue, and Cloud Databases.</p>
             </div>
           </div>
         </div>

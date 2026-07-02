@@ -55,6 +55,14 @@
   transform: translate(-50%, -50%) rotateX(80deg) rotateY(60deg);
 }
 
+[data-theme='light'] .orbit {
+  border-color: rgba(14, 165, 233, 0.6);
+}
+
+[data-theme='light'] .orbit-2 {
+  border-color: rgba(168, 85, 247, 0.6);
+}
+
 /* Rotating Wrappers */
 .moon-container {
   position: absolute;
@@ -86,7 +94,7 @@
   left: calc(50% - 20px);
   width: 40px;
   height: 40px;
-  background: rgba(10, 10, 12, 1);
+  background: var(--bg-secondary);
   border: 1px solid rgba(56, 189, 248, 0.6);
   border-radius: 50%;
   display: flex;
