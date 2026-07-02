@@ -6,6 +6,18 @@ import './DigitalEarth.css';
 const DigitalEarth = () => {
   const globeEl = useRef();
   const [countries, setCountries] = useState({ features: [] });
+  const [globeSize, setGlobeSize] = useState(420);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setGlobeSize(window.innerWidth < 450 ? 220 : 420);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     // Fetch GeoJSON for the globe's countries
@@ -51,8 +63,8 @@ const DigitalEarth = () => {
       <div className="globe-container">
         <Globe
           ref={globeEl}
-          width={420}
-          height={420}
+          width={globeSize}
+          height={globeSize}
           backgroundColor="rgba(0,0,0,0)" // Transparent background
           globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
           bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"

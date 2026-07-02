@@ -1,7 +1,8 @@
 .earth-wrapper {
   position: relative;
-  width: 420px;
-  height: 420px;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,8 +123,22 @@
 
 @media (max-width: 968px) {
   .earth-wrapper {
-    width: 350px;
-    height: 350px;
+    width: 100%;
+    max-width: 350px;
     margin: 3rem auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .earth-wrapper {
+    max-width: 220px;
+    margin: 2rem auto;
+  }
+  .moon {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+    top: -14px;
+    left: calc(50% - 14px);
   }
 }
