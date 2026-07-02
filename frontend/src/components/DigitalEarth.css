@@ -1,0 +1,129 @@
+.earth-wrapper {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.globe-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateZ(1px); /* Ensures 3D intersection works with CSS rings */
+  cursor: grab;
+}
+
+.globe-container:active {
+  cursor: grabbing;
+}
+
+/* The 3D Rings */
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1.5px solid rgba(56, 189, 248, 0.25);
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.orbit-1 {
+  width: 120%;
+  height: 120%;
+  transform: translate(-50%, -50%) rotateX(75deg) rotateY(15deg);
+}
+
+.orbit-2 {
+  width: 135%;
+  height: 135%;
+  transform: translate(-50%, -50%) rotateX(65deg) rotateY(-45deg);
+  border-color: rgba(192, 132, 252, 0.25);
+}
+
+.orbit-3 {
+  width: 110%;
+  height: 110%;
+  transform: translate(-50%, -50%) rotateX(80deg) rotateY(60deg);
+}
+
+/* Rotating Wrappers */
+.moon-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.orbit-1 .moon-container { animation: orbit-z 12s linear infinite; }
+.orbit-2 .moon-container { animation: orbit-z-rev 18s linear infinite; }
+.orbit-3 .moon-container { animation: orbit-z 15s linear infinite; }
+
+@keyframes orbit-z {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+@keyframes orbit-z-rev {
+  from { transform: rotateZ(360deg); }
+  to { transform: rotateZ(0deg); }
+}
+
+/* The Tech Moons */
+.moon {
+  position: absolute;
+  top: -20px; /* Offset by half width/height */
+  left: calc(50% - 20px);
+  width: 40px;
+  height: 40px;
+  background: rgba(10, 10, 12, 1);
+  border: 1px solid rgba(56, 189, 248, 0.6);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+  font-size: 1.2rem;
+  will-change: transform;
+}
+
+/* Counter-rotations to keep icons facing the camera */
+.orbit-1 .moon { animation: counter-1 12s linear infinite; }
+.orbit-2 .moon { 
+  animation: counter-2-rev 18s linear infinite; 
+  border-color: #c084fc; 
+  color: #c084fc; 
+  box-shadow: 0 0 15px rgba(192, 132, 252, 0.4); 
+}
+.orbit-3 .moon { animation: counter-3 15s linear infinite; }
+
+@keyframes counter-1 {
+  from { transform: rotateZ(0deg) rotateY(-15deg) rotateX(-75deg); }
+  to { transform: rotateZ(-360deg) rotateY(-15deg) rotateX(-75deg); }
+}
+@keyframes counter-2-rev {
+  from { transform: rotateZ(-360deg) rotateY(45deg) rotateX(-65deg); }
+  to { transform: rotateZ(0deg) rotateY(45deg) rotateX(-65deg); }
+}
+@keyframes counter-3 {
+  from { transform: rotateZ(0deg) rotateY(-60deg) rotateX(-80deg); }
+  to { transform: rotateZ(-360deg) rotateY(-60deg) rotateX(-80deg); }
+}
+
+@media (max-width: 968px) {
+  .earth-wrapper {
+    width: 350px;
+    height: 350px;
+    margin: 3rem auto;
+  }
+}

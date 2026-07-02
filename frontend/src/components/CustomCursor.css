@@ -1,0 +1,25 @@
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(56, 189, 248, 0.8);
+  border-radius: 50%;
+  pointer-events: none; /* Make sure it doesn't block clicks */
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 9999;
+  transition: transform 0.1s ease-out; /* Smooth following effect */
+  margin-top: -20px; /* Offset to center on mouse (half width) */
+  margin-left: -20px; /* Offset to center on mouse (half height) */
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.6), inset 0 0 10px rgba(56, 189, 248, 0.3);
+  background-color: rgba(56, 189, 248, 0.1);
+  mix-blend-mode: screen;
+}
+
+[data-theme='light'] .custom-cursor {
+  border-color: rgba(14, 165, 233, 0.8);
+  box-shadow: 0 0 15px rgba(14, 165, 233, 0.6), inset 0 0 10px rgba(14, 165, 233, 0.3);
+  background-color: rgba(14, 165, 233, 0.1);
+  mix-blend-mode: multiply;
+}
