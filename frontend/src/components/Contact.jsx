@@ -21,9 +21,9 @@ const Contact = () => {
     setStatus('sending');
 
     // Replace these strings with your actual EmailJS IDs later!
-    const serviceId = 'service_placeholder';
-    const templateId = 'template_placeholder';
-    const publicKey = 'public_key_placeholder';
+    const serviceId = 'service_1v5vafn';
+    const templateId = 'template_siixorm';
+    const publicKey = 'R4RB_-ucaVIF2S8Ao';
 
     emailjs.sendForm(serviceId, templateId, form.current, publicKey)
       .then((result) => {
