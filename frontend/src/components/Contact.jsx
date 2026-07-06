@@ -21,7 +21,7 @@ const Contact = () => {
     setStatus('sending');
 
     // Replace these strings with your actual EmailJS IDs later!
-    const serviceId = 'service_1v5vafn';
+    const serviceId = 'service_uzsu3bg';
     const templateId = 'template_siixorm';
     const publicKey = 'R4RB_-ucaVIF2S8Ao';
 
